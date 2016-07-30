@@ -1,0 +1,13 @@
+/* Put your custom CSS here */
+.fotoEliminar {
+	width: 25px;
+	height: 25px;
+}
+
+.foto {
+	float: right;
+}
+
+#map_canvas {
+	height: 100%
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta charset="UTF-8">
+
+		<!--CSS-->
+		<link rel="stylesheet" href="css/modelado.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+
+		<!--JavaScript-->
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+		<script src="js/codigo.js"></script>
+		<script src="js/camera.js"></script>
+
+		<!--Fondo-->
+		<style type="text/css">
+		.ui-page {
+			background: transparent url(imagen/fondo.jpg);
+		}
+		</style>
+</head>
+<body>
+
+	<!-- Home -->
+	<div data-role="page" id="page3">
+		<div data-theme="b" data-role="header">
+			<h3 id="idNombreNota">Notas:</h3>
+		</div>
+
+		<!--Contenido de la página-->
+		<div data-role="content">
+			<div id="idMenu" data-role="navbar" data-iconpos="top">
+				<ul>
+					<li><a onClick="parent.location='listaNotas.html'" data-transition="slide" data-theme="" data-icon=""> Lista de Notas </a></li>
+					<li><a onClick="parent.location='anadirNota.html'" data-transition="slide" data-theme="" data-icon=""> Añadir Nota </a></li>
+					<li><a onClick="parent.location='mapa.html'" data-transition="slide" data-theme="" data-icon=""> Mapa </a></li>						
+				</ul>
+			</div>
+		</div>
+
+		<!--Formulario para introducir notas-->
+		<form id="formNotas" action="">
+			<div data-role="fieldcontain">
+				<label for="titulo"> Título para la Nota: </label> <input name="" id="titulo" placeholder="Ponga un título a su nota" value="" type="text" />
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="descripcionNota"> Descripción Nota: </label>
+				<textarea name="Descripcion" id="descripcionNota" placeholder="Añada una Descripción"></textarea>
+			</div>
+		</form>
+
+		<!--Guardar Nota-->
+		<div>
+			<a id="idGuardarNota" data-role="button" onclick="save()" href="listaNotas.html"> Guardar </a>
+		</div>
+
+
+	<!--Pie de Página-->
+	<div data-theme="b" data-role="footer" data-position="fixed">
+		<center><p>Prototipo Funcional para la asignatura DAW. Creado por Francisco José Caro<br>
+		Estefanía Fernández y Sergio Pulido</p></center>
+	</div>
+
+</div>
+</body>
+</html>
