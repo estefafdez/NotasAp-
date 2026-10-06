@@ -9,12 +9,12 @@
 	<!--CSS-->
 	<style type="text/css"></style>
 	<link rel="stylesheet" href="css/modelado.css" />
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
 
 	<!--JavaScript-->
-	<script src="js/map.js"></script>
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 
 	<!--Fondo-->
 	<style type="text/css">
@@ -24,7 +24,7 @@
 	</style>
 
 </head>
-<body onload="initialize()">
+<body>
 	<!--Home-->
 	<div data-role="page" id="page4">
 		<div data-theme="b" data-role="header">
@@ -43,7 +43,9 @@
 		<script language="javascript">
         function get_loc() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(coordenadas);
+                navigator.geolocation.getCurrentPosition(coordenadas, function() {
+                    document.getElementById("mapStatus").textContent = "No se pudo obtener tu ubicación. Revisa el permiso del navegador.";
+                });
             }else{
                 alert('Tu navegador no soporta la API de geolocalizacion');
             }
@@ -53,7 +55,9 @@
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
             var map = document.getElementById("mapa");
-            map.src = "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lon + "&zoom=15&size=400x400&markers=color:green|label:A|" + lat + "," + lon + "&sensor=false";
+            map.href = "https://www.openstreetmap.org/?mlat=" + encodeURIComponent(lat) + "&mlon=" + encodeURIComponent(lon) + "#map=15/" + lat + "/" + lon;
+            map.hidden = false;
+            document.getElementById("mapStatus").textContent = "Ubicación obtenida. Abre el mapa solo si quieres compartirla con el proveedor.";
         }
         </script>
 
@@ -61,7 +65,8 @@
 		
 		<center><a href="javascript:get_loc();">Mostrar localización</a><br></center>
     	<p></p>
-    	<center><p><img id="mapa" src=""></p></center>
+    	<p id="mapStatus" role="status">La ubicación se solicita solo al pulsar el botón.</p>
+        <p><a id="mapa" hidden target="_blank" rel="noopener noreferrer">Abrir ubicación en OpenStreetMap</a></p>
 
 
 		<div data-theme="b" data-role="footer" data-position="fixed">
