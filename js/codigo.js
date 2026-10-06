@@ -12,28 +12,35 @@ function save() {
 }
 
 function taskList() {
-	var taskList = $("#idContenido");
-
-	for ( var idPos = 0; idPos < storage.length; idPos++) {
-
-		var key = storage.key(idPos);
-		var value = storage.getItem(key);
-		var listTitle = document.createElement("li");
-		var list = document.createElement("li");
-
-		listTitle.setAttribute("data-role", "list-divider");
-		listTitle.setAttribute("role", "heading");
-		listTitle.innerHTML = key + "<div class='foto' onclick ='eliminar("
-				+ idPos + ");'>"
-				+ "<img class='fotoEliminar' src='imagen/botonDelete.png'/>"
-				+ "</div>";
-
-		list.setAttribute("data-theme", "c");
-		list.innerHTML = value;
-
-		taskList.append(listTitle);
-		taskList.append(list);
-	}
+    var container = document.getElementById("idContenido");
+    container.textContent = "";
+    for (var idPos = 0; idPos < storage.length; idPos++) {
+        var key = storage.key(idPos);
+        var title = document.createElement("li");
+        var note = document.createElement("li");
+        title.setAttribute("data-role", "list-divider");
+        title.textContent = key;
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "foto";
+        button.setAttribute("aria-label", "Eliminar nota " + key);
+        var image = document.createElement("img");
+        image.className = "fotoEliminar";
+        image.src = "imagen/botonDelete.png";
+        image.alt = "Eliminar";
+        button.appendChild(image);
+        (function(noteKey) {
+            button.addEventListener("click", function() {
+                storage.removeItem(noteKey);
+                refresh();
+            });
+        })(key);
+        title.appendChild(button);
+        note.setAttribute("data-theme", "c");
+        note.textContent = storage.getItem(key);
+        container.appendChild(title);
+        container.appendChild(note);
+    }
 }
 
 function eliminar(idPos) {
